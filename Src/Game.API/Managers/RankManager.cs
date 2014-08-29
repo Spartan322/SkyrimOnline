@@ -49,6 +49,11 @@ namespace Game.API.Managers
 		
 		public void AddRank(Rank rank)
 		{
+			if(ranks.ContainsKey(rank.Level))
+			{
+				ranks[rank.Level] = rank
+				return;
+			}
 			ranks.Add(rank.Level, rank);
 		}
 		

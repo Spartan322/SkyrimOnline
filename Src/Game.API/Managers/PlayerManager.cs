@@ -18,11 +18,29 @@ namespace Game.API.Managers
         private readonly bool isHost;
         private readonly Dictionary<long, Player> players = new Dictionary<long, Player>();
         private Player localPlayer;
+        private static PlayerManager instance;
 
         public PlayerManager(bool isHost)
         {
             this.isHost = isHost;
             hearbeatTimer = new GameTimer();
+            instance = this;
+        }
+        
+        public PlayerManager Instance
+        {
+            get
+            {
+                if(!instance)
+                    PlayerManager(false);
+                return instance;
+            }
+            
+            set
+            {
+                if(value is PlayerManager)
+                    instance = value;
+            }
         }
 
         public IEnumerable<Player> Players
